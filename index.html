@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CDC Media Search</title>
+</head>
+
+<body>
+    <form id="media">
+        <label for="media-input">Search for CDC media</label>
+        <input type="text" id="media-input">
+        <br>
+        <input id="find-media" type="submit" value="Media Search">
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#find-media").on("click", function (event) {
+
+            event.preventDefault();
+
+            var media = $("#media-input").val();
+
+            var queryURL = "https://tools.cdc.gov/api/v2/resources/media?q=" + media;
+            
+            $.ajax({
+               
+                url: queryURL,
+                method: "GET",
+
+            }).then(function (response) {
+                console.log(response);
+         
+            })
+        });
+    </script>
+</body>
+
+</html>
