@@ -33,6 +33,7 @@
                 method: "GET",
 
             }).then(function (response) {
+                $("#search-list").empty();
                 console.log(response);
                 console.log("url [1]: " + response.results[1].contentUrl);
                 
