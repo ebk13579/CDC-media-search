@@ -15,6 +15,7 @@
         <br>
         <input id="find-media" type="submit" value="Media Search">
     </form>
+    <div id="search-list"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -33,6 +34,13 @@
 
             }).then(function (response) {
                 console.log(response);
+                console.log("url [1]: " + response.results[1].contentUrl);
+                
+                for (let i=0; i<response.results.length; i++) {
+                    console.log(response.results[i].name);
+                    console.log(response.results[i].contentUrl);
+                    $("#search-list").append(" | <a href=" + response.results[i].contentUrl + " target='_blank'>" + response.results[i].name + "</a> | <br>")
+                }
          
             })
         });
