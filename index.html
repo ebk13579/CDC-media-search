@@ -17,26 +17,15 @@
         <input id="find-media" type="submit" value="Media Search">
     </form>
     <table id="search-list">
-        <thead>
-            <tr>
-                <th>URL</th>
-                <th>Updated</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td id="Name/URL"></td>
-                <td id="Updated"></td>
-            </tr>
-        </tbody>
     </table>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
         $("#find-media").on("click", function (event) {
 
             event.preventDefault();
-
+            var cellz = [];
             var media = $("#media-input").val();
+            var html = '';
 
             var queryURL = "https://tools.cdc.gov/api/v2/resources/media?q=" + media;
 
@@ -47,6 +36,7 @@
 
             }).then(function (response) {
                 $("#search-list").empty();
+
                 console.log(response);
                 console.log("url [1]: " + response.results[1].contentUrl);
 
@@ -69,8 +59,19 @@
                     //     console.log(headers);
                     //     console.log(rows);
                     // });
-                    $("#search-list").append("URL: <a href=" + response.results[i].contentUrl + " target='_blank'>" + response.results[i].name + "</a> | ");
-                    $("#search-list").append("Updated: " + response.results[i].dateContentUpdated + "<br>");
+
+                    // var table = document.getElementById("search-list");
+                    // var row = table.insertRow(i);
+                    // cellz[i] = row.insertCell(i);
+                    // cellz[i + 1] = row.insertCell(i + 1);
+                    // cellz[i].innerHTML = "URL: <a href=" + response.results[i].contentUrl + " target='_blank'>" + response.results[i].name + "</a>";
+                    // cellz[i + 1].innerHTML = "Updated: " + response.results[i].dateContentUpdated;
+
+
+                    $("#search-list").append("<tr><td> URL: <a href=" + response.results[i].contentUrl + " target='_blank'>" + response.results[i].name + "</a> </td><td> Updated: " + response.results[i].dateContentUpdated + "</td></tr>");
+
+                    // $("#Name-URL").append("URL: <a href=" + response.results[i].contentUrl + " target='_blank'>" + response.results[i].name + "</a> | ");
+                    // $("#Updated").append("Updated: " + response.results[i].dateContentUpdated + "<br>");
                 }
 
             })
